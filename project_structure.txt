@@ -1,0 +1,33 @@
+deepgreen-backend/
+│
+├── app/
+│   ├── __init__.py                   # Initializes the Flask app and sets up configurations.
+│   ├── config.py                     # Configuration file for different environments (development, testing, production).
+│   ├── models.py                     # Defines the database models used in the application.
+│   ├── routes/                       # Directory containing route definitions for the API endpoints.
+│   │   ├── auth_routes.py            # Routes for user authentication (login, registration, etc.).
+│   │   ├── image_routes.py           # Routes for handling image uploads and processing.
+│   │   ├── prediction_routes.py      # Routes for disease prediction based on uploaded images.
+│   │   ├── profile_routes.py         # Routes for user profile management.
+│   │   ├── suggestion_routes.py      # Routes for providing disease cure suggestions.
+│   │   ├── disease_routes.py         # Routes for retrieving information about various plant diseases.
+│   │   ├── history_routes.py         # Routes for viewing and downloading prediction history.
+│   │   ├── survey_routes.py          # Routes for handling user satisfaction surveys.
+│   │   ├── stat_routes.py            # Routes for fetching various statistical data.
+│   │   └── dashboard_routes.py       # Routes for the dashboard, providing an overview of user activities.
+|   |
+│   ├── utils/                        # Directory containing utility modules.
+│   |   ├── file_utils.py             # Utility functions for file handling.
+│   |   └── model_utils.py            # Utility functions for AI model handling.
+│   └── static/                       # Directory for static files.
+│       ├── images/                   # Placeholder for image handling.
+│       └── uploads/                  # Placeholder for uploaded files handling.
+|
+├── migrations/                       # Directory for database migration files.
+|
+├── venv/                             # Virtual environment for managing project dependencies.
+|
+├── best_model1_1.keras               # Pre-trained AI model used for disease predictions.
+|
+├── run.py                            # Entry point for running the Flask application.
+└── requirements.txt                  # List of Python dependencies required for the project.
