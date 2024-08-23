@@ -104,34 +104,6 @@ def get_confidence_percentage_distribution():
     
     return jsonify(data), 200
 
-@bp.route('/charts/confidence_by_class', methods=['GET'])
-@jwt_required()
-def get_confidence_by_class():
-    user_id = get_jwt_identity()['id']
-    
-    # Query the confidence percentages grouped by predicted class for the logged-in user
-    confidence_by_class = db.session.query(
-        Prediction.predicted_class, Prediction.confidence_percentage
-    ).filter(
-        Prediction.user_id == user_id
-    ).all()
-    
-    # Organize the data
-    data = {}
-    for predicted_class, confidence in confidence_by_class:
-        if predicted_class not in data:
-            data[predicted_class] = []
-        data[predicted_class].append(confidence)
-    
-    # Prepare the final data format for box plot
-    box_plot_data = []
-    for predicted_class, confidences in data.items():
-        box_plot_data.append({
-            "class": predicted_class,
-            "confidences": confidences
-        })
-    
-    return jsonify(box_plot_data), 200
 
 @bp.route('/statistics', methods=['GET'])
 @jwt_required()

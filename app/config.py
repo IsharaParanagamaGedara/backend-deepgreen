@@ -18,3 +18,10 @@ class Config:
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
+
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    MAIL_SUPPRESS_SEND = True
+    JWT_SECRET_KEY = 'testing_jwt_secret_key'
+    SECRET_KEY = 'testing_secret_key'

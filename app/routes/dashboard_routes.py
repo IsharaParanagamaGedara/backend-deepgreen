@@ -113,10 +113,14 @@ def get_predictions_by_crop_type():
     # Calculate total predictions
     total_predictions = sum(crop_type_counts.values())
 
-    # Calculate prediction percentages
-    crop_type_percentages = {crop: (count / total_predictions) * 100 for crop, count in crop_type_counts.items()}
+    if total_predictions == 0:
+        crop_type_percentages = {crop: 0 for crop in crop_type_counts}
+    else:
+        # Calculate prediction percentages
+        crop_type_percentages = {crop: (count / total_predictions) * 100 for crop, count in crop_type_counts.items()}
 
     return jsonify({
         'crop_type_counts': crop_type_counts,
         'crop_type_percentages': crop_type_percentages
     }), 200
+

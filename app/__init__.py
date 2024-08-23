@@ -6,7 +6,7 @@ from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_mail import Mail
-from app.config import Config
+from app.config import Config, TestingConfig
 from itsdangerous import URLSafeTimedSerializer
 
 db = SQLAlchemy()
@@ -15,9 +15,9 @@ jwt = JWTManager()
 migrate = Migrate()
 mail = Mail()
 
-def create_app():
+def create_app(config_class=Config):  # Modified to accept a config class
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)  # Load the provided config class
     
     CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
     db.init_app(app)
@@ -27,7 +27,7 @@ def create_app():
     mail.init_app(app)
     
     s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
-    app.config['SECRET_KEY'] = Config.SECRET_KEY
+    app.config['SECRET_KEY'] = config_class.SECRET_KEY
     
     # Import routes and blueprints
     with app.app_context():
@@ -46,6 +46,7 @@ def create_app():
         app.register_blueprint(survey_routes.bp, url_prefix='/survey')
         app.register_blueprint(dashboard_routes.bp, url_prefix='/dashboard')
         app.register_blueprint(stat_routes.bp, url_prefix='/stat')
+
     
         # Create database tables
         db.create_all()
@@ -53,8 +54,7 @@ def create_app():
         # Insert initial data
         from app.models import insert_initial_data
         insert_initial_data()
-        
-
+    
     # Route for serving static files
     @app.route('/static/uploads/<filename>')
     def uploaded_file(filename):
