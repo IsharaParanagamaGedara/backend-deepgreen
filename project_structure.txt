@@ -23,6 +23,19 @@ deepgreen-backend/
 │       ├── images/                   # Placeholder for image handling.
 │       └── uploads/                  # Placeholder for uploaded files handling.
 |
+├── tests/                            # Directory containing unit tests for the application.
+│   ├── conftest.py                   # Configuration for the pytest framework.
+│   ├── test_auth_routes.py           # Tests for authentication routes.
+│   ├── test_profile_routes.py        # Tests for profile routes.
+│   ├── test_image_routes.py          # Tests for image routes.
+│   ├── test_prediction_routes.py     # Tests for prediction routes.
+│   ├── test_suggestion_routes.py     # Tests for suggestion routes.
+│   ├── test_disease_routes.py        # Tests for disease routes.
+│   ├── test_history_routes.py        # Tests for history routes.
+│   ├── test_survey_routes.py         # Tests for survey routes.
+│   ├── test_dashboard_routes.py      # Tests for dashboard routes.
+│   └── test_stt_routes.py            # Tests for stat routes.
+|
 ├── migrations/                       # Directory for database migration files.
 |
 ├── venv/                             # Virtual environment for managing project dependencies.
